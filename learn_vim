@@ -1,0 +1,30 @@
+// Running
+	vi file.txt
+
+// two modes - edit and GUI
+	Esc		// to swap between the two of them
+
+// edit mode
+	i		// allows me to edit at the point of the cursor
+	a 		// edit before cursor
+
+
+// GUI
+	:e /etc/filename.txt 	// will now edit this file
+	:w 		// saves file
+	:wq 	// saves and quits
+	:q!		// quits without saving
+	:Y		// copy
+	:P 		// paste
+	:dd 	// delete line / also cut
+	:yy 	// copies a whole line
+	:u 		// undo
+	:12 	// goes to line 12
+	:/this	// searches the document for this
+	:syntax on 		// turn on the colour scheme
+	:colorscheme	// change the colour scheme (press tab to cycle through and then 					enter)
+	:colorscheme delek		// saves the scheme for later use
+	:set shell=/bin/bash	// sets shell of vim to bash
+		:shell				// breaks out of vim and into the desired shell
+
+
