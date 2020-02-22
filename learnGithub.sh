@@ -4,10 +4,11 @@ git init name			#  initialise this folder as a git repo
 	
 git add "file.txt"
 git add .		# adds all
+git add *		# adds all files - does not delete
 git commit -m "message"		# commits to git - updates on their server, but doesnt change it. 
 git push 		# changes their server
 
-git pull		# gets changes 
+git pull		# gets changes 	
 
 git checkout -b [new_branch_name] 	# Create a new branch and switch to it
 git branch							# List all current branches
