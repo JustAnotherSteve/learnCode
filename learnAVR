@@ -1,0 +1,60 @@
+
+# for proper explanations, look at comp2121 notes
+
+
+
+# commands
+	sub Rd, Rr	# Rd=Rd-Rr
+	mul Rd, Rd-Rr 	# r1:r0=Rr*Rd 
+
+
+
+//define a variable for a reg
+.def regOne = r1
+
+//#defines
+.equ variableOne = 24
+
+//20 byte word
+.dseg word: .byte 20
+
+//Stores byte constants
+.cseg 	varName: .db "words and shite" , 0	; the 0 is the buffer size at the end
+		varName: .dw 10, 20, 40				; stores them in 'word' (2 byte) format, i.e. not bytes.
+
+// to add an integer
+subi temp, -3
+
+//divide by two
+lsl temp
+
+//Stack initialisation
+ldi temp, low(RAMEND)
+out SPL, temp
+ldi temp, high(RAMEND)
+out SPH, temp
+
+//Storing to program flash memory (.desg)
+st X, temp			; indirect
+sts TIMSK2, temp	; directly - could be anything
+
+//Loading from program flash memory
+ld temp, X			; indirect
+lds temp, $FF00		; direct
+
+//set bits
+sbi temp, 0b00001111	; will set the bits with '1' to 1
+cbi temp, 0b00001111	; will set the bits with '1' to 0
+
+//Call functions iteratively
+ldi ZL, low(functionName)
+ldi ZH, high(functionName)
+icall						; calls the function in Z
+
+
+
+
+//////////////////////////////////////////CODE EXAMPLES/////////////////////////////////////////////////////////
+
+//Multiply two numbers by each other 
+
