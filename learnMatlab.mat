@@ -26,6 +26,7 @@
 
 
 % --------------Data Types--------------
+	syms X Y phi 			% symbolic variables are made
 	double
 	single 
 	int32, int16, int8    	% (int, short, char, *)
@@ -70,6 +71,8 @@
 		y=x.^2;
 		plot(x,y);
 		title({'subplot 1', 'below it'}, 'color', 'white');		
+		xlabel("x")
+		ylabel("y")
 		subplot(2,2,2);
 		plot(x,y);
 
@@ -124,6 +127,38 @@
 		end;
 	% saving figure
 		savefig(A, 'Name.jpeg');
+	% Camera Calibration
+		% Detect the checkerboard corners in the images.
+		[imagePoints, boardSize] = detectCheckerboardPoints(files);
+		% Generate the world coordinates of the checkerboard corners in the
+		% pattern-centric coordinate system, with the upper-left corner at (0,0).
+		squareSize = 29; % in millimeters
+		worldPoints = generateCheckerboardPoints(boardSize, squareSize);
+		% Calibrate the camera.
+		cameraParams = estimateCameraParameters(imagePoints, worldPoints);
+		% Undistort the Image
+		[im, newOrigin] = undistortImage(imOrig, cameraParams, 'OutputView', 'full');
+	% image importing 
+		imread()	% imports image array to Matlab from a source
+		imshow()	% displays image array in Matlab
+	% changing colour spaces
+		rgb2hsv(image);
+		rgb2gray(image);				% makes a grayscale image
+		im2bw(image,thresholdValue);	% makes a bw image 
+		% RGB to LAB
+		cform = makecform(‘srgb2lab’);
+		lab = applycform(image, cform);
+	% binary image manipulation
+		bwareaopen(binaryImage, size)	% Removes small objects from binary image
+		imerode(binaryImage)			% Erodes the binary image
+		imdilate(binaryImage)			% Dilates the binary image
+		imopen()
+		imclose()
+		regionprops(binaryImage)		% Measures various properties of the binary image
+		% We can create filters to extract the regions of interest
+		% Properties include – Area, bounding box, eccentricity, convex hull etc
+
+
 			
 
 % --------------Functions--------------
@@ -178,6 +213,7 @@
 	var
 	std 	% std deviation
 	feval(Func, variables)
+	jacobian(function, [x;y;phi])
 
 
 
@@ -191,7 +227,7 @@
 			summary(table)	% 5 num sum as well
 
 	% --------------Distributions--------------
-		% Normal: X~N(μ, σ)~N(mean,std)
+		% Normal (Or Gaussian): X~N(μ, σ)~N(mean,std)
 			normpdf(a,μ, σ)						% P(X=a)
 			normcdf(a,μ, σ)						% P(X<a)
 			1−normcdf(a,μ, σ)					% P(X>a)
