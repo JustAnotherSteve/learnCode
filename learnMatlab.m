@@ -179,7 +179,7 @@
 	vertcat();
 	whos('z');	% prints out certain info about the variable. 
 	transpose(x)	% transposes the matrix
-		y=x';		% alternative
+		y=x'' (but just one);		% alternative
 	reshape 	% Reshapes the matrix, keeping all of the components, but changing the shape. 
 		A=rand(2,4);
 		A=reshape(A,8,1);

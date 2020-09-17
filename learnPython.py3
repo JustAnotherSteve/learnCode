@@ -52,7 +52,7 @@ dicttwo = {1:'one', 2:'two', 3:'three'}
 print (dicttwo) # = all
 print (dicttwo.keys())  # = all keys
 print (dicttwo.values()) # = all values
-dict.items() # returns the keys and values in a list!
+dict.items() # returns the keys and values in a list! 
 
 #exponent
 isquared = i**2
